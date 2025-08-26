@@ -19,6 +19,7 @@ docker run -d \
   --name jenkins-dotnet9 \
   --platform=linux/amd64 \
   -p 8080:8080 -p 50000:50000 \
-  -v $(pwd)/jenkins_home:/var/jenkins_home \
+  -v jenkins_home:/var/jenkins_home \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  jenkins-dotnet9
+  --user root \
+  jenkins-dotnet9 
