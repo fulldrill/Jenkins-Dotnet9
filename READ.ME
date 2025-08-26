@@ -1,0 +1,24 @@
+Build & Run on Mac (Apple Silicon or Intel)
+
+docker buildx build --platform=linux/arm64,linux/amd64 -t jenkins-dotnet9 .
+
+
+🚀 Run Jenkins with access to Docker
+
+🛠️ Shortcut: Auto-remove if it exists
+If you want to overwrite without typing stop/rm every time, you can do:
+
+# Create folder for Jenkins home
+mkdir -p $(pwd)/jenkins_home
+
+# Give full read/write permissions (safe for local dev)
+chmod -R 777 $(pwd)/jenkins_home
+
+# Run container
+docker run -d \
+  --name jenkins-dotnet9 \
+  --platform=linux/amd64 \
+  -p 8080:8080 -p 50000:50000 \
+  -v $(pwd)/jenkins_home:/var/jenkins_home \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  jenkins-dotnet9
